@@ -2,14 +2,16 @@
   "name": "projectile",
   "version": "1.0.0",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "echo build"
   },
   "author": "",
   "license": "ISC",
   "description": "",
   "devDependencies": {
     "inline-css": "^3.0.0",
-    "parcel-bundler": "^1.12.4"
+    "markdown-it": "^12.0.4"
   }
 }
