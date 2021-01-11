@@ -1,8 +1,10 @@
 import inlineCss from 'inline-css';
 import fs from 'fs/promises';
+import MarkdownIt from 'markdown-it';
 
 const TEMPLATE_FILE_PATH = "./src/index.html";
 const CSS_FILE_PATH = "./src/index.css";
+const MARKDOWN_FILE_PATH = "./src/index.md";
 
 async function readFile(filePath) {
     try {
@@ -14,10 +16,15 @@ async function readFile(filePath) {
 }
 
 (async function () {
+    const md = new MarkdownIt();
+
     let html = await readFile(TEMPLATE_FILE_PATH);
     let css = await readFile(CSS_FILE_PATH);
-    // var html = "<style>div{color:red;}</style><div/>";
+    let markdown = await readFile(MARKDOWN_FILE_PATH);
 
+    let mainContent = md.render(markdown);
+    console.log(mainContent);
+    
     let options = {
         url: "./",
         extraCss: css
