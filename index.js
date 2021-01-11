@@ -24,13 +24,14 @@ async function readFile(filePath) {
     let markdown = await readFile(MARKDOWN_FILE_PATH);
 
     let mainContent = md.render(markdown);
-    console.log(mainContent);
     
+    let htmlWithContent = html.replace(TEMPLATE_CONTENT_STRING, mainContent);
+
     let options = {
         url: "./",
         extraCss: css
     };
 
-    inlineCss(html, options)
-        .then(function (html) { console.log(html); });
+    inlineCss(htmlWithContent, options)
+        .then(function (outputHtml) { console.log(outputHtml); });
 })();

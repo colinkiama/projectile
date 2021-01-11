@@ -21,4 +21,4 @@ Whoever made invented these terms must have been eating while coming up with the
 They knew exactly what they were doing
 
 ###### What do you mean?
-Some people want to watch the world burn and others want to hide great puns in them. *Strange, isn't it* ?
+Some people want to watch the world burn and others want to hide great puns in them. *Strange, isn't it?*
