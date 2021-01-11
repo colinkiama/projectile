@@ -7,6 +7,8 @@ const fsPromises = fs.promises;
 const TEMPLATE_FILE_PATH = "./src/index.html";
 const CSS_FILE_PATH = "./src/index.css";
 const MARKDOWN_FILE_PATH = "./src/index.md";
+const OUTPUT_DIRECTORY = "./output";
+
 const TEMPLATE_CONTENT_STRING = "{{slinger_content}}";
 
 async function readFile(filePath) {
@@ -18,15 +20,41 @@ async function readFile(filePath) {
     }
 }
 
-async function openFile(file) {
+function isErrorNotFound(err) {
+    return err.code === "ENOENT";
+}
+
+async function checkIfDirectoryExists(directory) {
+    return fsPromises
+        .stat(directory)
+        .then(fsStat => {
+            return fsStat.isDirectory();
+        })
+        .catch(err => {
+            if (isErrorNotFound(err)) {
+                return false;
+            }
+            throw err;
+        });
+}
+
+async function makeOutputDirectory(directory) {
+    fsPromises.mkdir(directory, { recursive: true })
+        .then(() => { return true; })
+        .catch(err => {
+            throw err;
+        })
+}
+
+async function writeFile(file, content) {
     try {
-        const csvHeaders = 'name,quantity,price'
-        await fsPromises.writeFile('groceries.csv', csvHeaders);
+        await fsPromises.writeFile(file, content);
     } catch (error) {
         console.error(`Got an error trying to write to a file: ${error.message}`);
     }
 }
 
+// Self-invoking function used in order to use "await" at entry point of script
 (async function () {
     const md = new MarkdownIt();
 
@@ -44,7 +72,11 @@ async function openFile(file) {
     };
 
     inlineCss(htmlWithContent, options)
-        .then(function (outputHtml) {
-            console.log(outputHtml);
+        .then(async function (outputHtml) {
+            let doesDirectoryExists = await checkIfDirectoryExists(OUTPUT_DIRECTORY);
+            if (!doesDirectoryExists) {
+                await makeOutputDirectory(OUTPUT_DIRECTORY);
+            }
+            await writeFile(OUTPUT_DIRECTORY + "/index.html", outputHtml);
         });
 })();
