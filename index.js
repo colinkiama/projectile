@@ -4,10 +4,10 @@ import MarkdownIt from 'markdown-it';
 
 const fsPromises = fs.promises;
 
-const TEMPLATE_FILE_PATH = "./src/index.html";
-const CSS_FILE_PATH = "./src/index.css";
-const MARKDOWN_FILE_PATH = "./src/index.md";
-const OUTPUT_DIRECTORY = "./output";
+const DEFAULT_TEMPLATE_FILE_PATH = "./src/index.html";
+const DEFAULT_CSS_FILE_PATH = "./src/index.css";
+const DEFAULT_MARKDOWN_FILE_PATH = "./src/index.md";
+const DEFAULT_OUTPUT_DIRECTORY = "./output";
 
 const TEMPLATE_CONTENT_STRING = "{{slinger_content}}";
 
@@ -54,13 +54,36 @@ async function writeFile(file, content) {
     }
 }
 
+
+
+async function inlineCss(htmlWithContent, outputPath, options) {
+    inlineCss(htmlWithContent, options)
+        .then(async function (outputHtml) {
+            let doesDirectoryExists = await checkIfDirectoryExists(outputPath);
+            if (!doesDirectoryExists) {
+                await makeOutputDirectory(outputPath);
+            }
+            await writeFile(outputPath + "/index.html", outputHtml);
+        });
+}
+
+export async function generate() {
+    await generate(DEFAULT_TEMPLATE_FILE_PATH, DEFAULT_CSS_FILE_PATH, DEFAULT_MARKDOWN_FILE_PATH,
+        DEFAULT_OUTPUT_DIRECTORY);
+}
+
 // Self-invoking function used in order to use "await" at entry point of script
-(async function () {
+export async function generate(htmlPath, cssPath, markdownPath, outputDirectory) {
     const md = new MarkdownIt();
 
-    let html = await readFile(TEMPLATE_FILE_PATH);
-    let css = await readFile(CSS_FILE_PATH);
-    let markdown = await readFile(MARKDOWN_FILE_PATH);
+    let html = await readFile(htmlPath);
+    let css = "";
+
+    if (cssPath != "") {
+        css = await readFile(cssPath);
+    }
+
+    let markdown = await readFile(markdownPath);
 
     let mainContent = md.render(markdown);
 
@@ -68,15 +91,18 @@ async function writeFile(file, content) {
 
     let options = {
         url: "./",
-        extraCss: css
     };
+
+    if (css != "") {
+        options.extraCss = css;
+    }
 
     inlineCss(htmlWithContent, options)
         .then(async function (outputHtml) {
-            let doesDirectoryExists = await checkIfDirectoryExists(OUTPUT_DIRECTORY);
+            let doesDirectoryExists = await checkIfDirectoryExists(outputDirectory);
             if (!doesDirectoryExists) {
-                await makeOutputDirectory(OUTPUT_DIRECTORY);
+                await makeOutputDirectory(outputDirectory);
             }
-            await writeFile(OUTPUT_DIRECTORY + "/index.html", outputHtml);
+            await writeFile(outputDirectory + "/index.html", outputHtml);
         });
-})();
+}
