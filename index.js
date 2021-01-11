@@ -5,6 +5,7 @@ import MarkdownIt from 'markdown-it';
 const TEMPLATE_FILE_PATH = "./src/index.html";
 const CSS_FILE_PATH = "./src/index.css";
 const MARKDOWN_FILE_PATH = "./src/index.md";
+const TEMPLATE_CONTENT_STRING = "{{slinger_content}}";
 
 async function readFile(filePath) {
     try {
