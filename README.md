@@ -13,6 +13,9 @@ Generate HTML email content for Slinger.
 ## Important Notes
 CSS support in emails is different from the rest of the web.
 
+## Contributing
+Found a bug or would like to help out with the project? Check this out: [Contributing to the project](CONTRIBUTING.md).
+
 Read these for more info:
 https://www.campaignmonitor.com/dev-resources/guides/coding-html-emails/
 
