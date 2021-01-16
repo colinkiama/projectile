@@ -32,7 +32,12 @@ export async function generate(...args) {
     if (options.hasOwnProperty("outputDirectory")) {
       outputDirectoryToUse = options.outputDirectory;
     }
-    generateEmailHTML(htmlPathToUse, cssPathToUse, markdownPathToUse, outputDirectoryToUse);
+    generateEmailHTML(
+      cssPathToUse,
+      htmlPathToUse,
+      markdownPathToUse,
+      outputDirectoryToUse
+    );
   } else {
     cssPathToUse = constants.paths.DEFAULT_CSS_FILE_PATH;
     generateEmailHTML(cssPathToUse);
@@ -43,13 +48,12 @@ async function generateEmailHTML(
   cssPath,
   htmlPath = constants.paths.DEFAULT_TEMPLATE_FILE_PATH,
   markdownPath = constants.paths.DEFAULT_MARKDOWN_FILE_PATH,
-  outputDirectory = constants.paths.DEFAULT_OUTPUT_DIRECTORY
+  outputDirectory = constants.paths.DEFAULT_OUTPUT_DIRECTORY,
+  outputFileName = constants.names.DEFAULT_OUTPUT_FILE_NAME
 ) {
-  console.log(markdownPath);
-  console.log(outputDirectory);
-  console.log(cssPath);
-  console.log(outputDirectory);
 
+  console.log("outputDirectory:", outputDirectory);
+  console.log("outputFileName:", outputFileName);
   let canUseCSSFile = cssPath != "";
   let html = await fileIO.readFile(htmlPath);
   let css = "";
@@ -80,10 +84,15 @@ async function generateEmailHTML(
     options.extraCss = css;
   }
 
-  createOutputFile(htmlWithContent, outputDirectory, options);
+  createOutputFile(htmlWithContent, outputDirectory, outputFileName, options);
 }
 
-async function createOutputFile(htmlWithContent, outputDirectory, options) {
+async function createOutputFile(
+  htmlWithContent,
+  outputDirectory,
+  outputFileName,
+  options
+) {
   let outputHtml = await inlineCss(htmlWithContent, options);
 
   let doesDirectoryExists = await fileIO.checkIfDirectoryExists(
@@ -93,5 +102,8 @@ async function createOutputFile(htmlWithContent, outputDirectory, options) {
   if (!doesDirectoryExists) {
     await fileIO.makeOutputDirectory(outputDirectory);
   }
-  await fileIO.writeFile(outputDirectory + "/index.html", outputHtml);
+  let outputPath = `${outputDirectory}/${outputFileName}`;
+  console.log(outputPath);
+  await fileIO.writeFile(outputPath, outputHtml);
+  
 }

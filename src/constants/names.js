@@ -1,0 +1,1 @@
+export const DEFAULT_OUTPUT_FILE_NAME = "index.html";

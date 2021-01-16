@@ -1,1 +1,1 @@
-const TEMPLATE_CONTENT_STRING = "{{slinger_content}}";
+export const TEMPLATE_CONTENT_STRING = "{{slinger_content}}";
