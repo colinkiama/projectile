@@ -1,0 +1,1 @@
+const TEMPLATE_CONTENT_STRING = "{{slinger_content}}";
