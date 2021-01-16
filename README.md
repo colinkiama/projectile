@@ -10,6 +10,24 @@ Generate HTML email content for Slinger.
 6. Now with the string from the last step, apply inline the css into style attributes using the inline-css library.
 7. The final HTML string generated will be put added into a new HTML file output. The generated file in the output directory will be used to send emails via slinger.
 
+## How to use
+You can just call `generate` and it will automatically get files from `index.css`, `index.html` and `index.md` the `/src` directory within your current one, then generate the final html file in the `/output` directory within your current one.
+
+If you would like to modify this behaviour call `generate(options)`.
+
+If you don't specify a field, the default behaviour will occur for for that option.
+
+Full options object possible values
+```javascript
+{
+    templatePath: string,
+    useCssFile: bool,
+    cssPath: string,
+    markdownPath: string,
+    outputDirectory: string
+}
+```
+
 ## Important Notes
 CSS support in emails is different from the rest of the web.
 

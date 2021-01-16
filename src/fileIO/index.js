@@ -1,5 +1,6 @@
 import fs from "fs";
 const fsPromises = fs.promises;
+
 async function readFile(filePath) {
   try {
     const data = await fsPromises.readFile(filePath);

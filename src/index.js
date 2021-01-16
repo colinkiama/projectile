@@ -1,7 +1,3 @@
-import fs from "fs";
-import generate from "./generate";
+import { generate } from "./generate/index.js";
 
-
-
-
-
+generate();

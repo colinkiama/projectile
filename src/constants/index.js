@@ -1,5 +1,5 @@
-import * as paths from "./paths";
-import * as templates from "templates";
+import * as paths from "./paths.js";
+import * as templates from "./templates.js";
 
 let allConstants = {
   paths,
