@@ -2,8 +2,6 @@ import constants from '../constants';
 import inlineCss from "inline-css";
 import MarkdownIt from "markdown-it";
 
-
-
 export async function generate() {
     await generate(
       constants.paths.DEFAULT_TEMPLATE_FILE_PATH,
