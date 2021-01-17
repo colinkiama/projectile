@@ -3,6 +3,7 @@ import inlineCss from "inline-css";
 import MarkdownIt from "markdown-it";
 import * as fileIO from "../fileIO/index.js";
 
+// Holds MarkdownIt object
 let md;
 
 export async function generate(...args) {
