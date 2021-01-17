@@ -4,13 +4,28 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "echo build"
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
-  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/colinkiama/projectile.git"
+  },
+  "keywords": [
+    "slinger",
+    "projectile",
+    "email",
+    "html",
+    "inline",
+    "css",
+    "markdown"
+  ],
+  "author": "Colin Kiama <colinkiama@gmail.com> (https://www.colinkiama.com)",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://www.github.com/colinkiama/projectile/issues"
+  },
   "description": "",
-  "devDependencies": {
+  "dependencies": {
     "inline-css": "^3.0.0",
     "markdown-it": "^12.0.4"
   }
