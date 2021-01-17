@@ -23,7 +23,7 @@ If you would like to modify this behaviour call `generate(options)`.
 
 If you don't specify a field, the default behaviour will occur for for that option.
 
-Full options object possible values
+Full options object possible fields
 ```javascript
 {
     templatePath: string,
