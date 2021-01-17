@@ -11,7 +11,7 @@ Generate HTML email content for Slinger.
 7. The final HTML string generated will be put added into a new HTML file output. The generated file in the output directory will be used to send emails via slinger.
 
 ## How to use
-You can just call `generate` and it will automatically get files from `index.css`, `index.html` and `index.md` the `/src` directory within your current one, then generate the final html file in the `/output` directory within your current one.
+You can just call `generate` and it will automatically get files from `index.css`, `index.html` and `index.md` the `/src` directory within your current one, then generate the final html file called `index.html` in the `/output` directory within your current one.
 
 If you would like to modify this behaviour call `generate(options)`.
 

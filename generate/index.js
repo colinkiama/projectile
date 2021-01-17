@@ -23,6 +23,8 @@ export async function generate(...args) {
       } else {
         cssPathToUse = constants.paths.DEFAULT_CSS_FILE_PATH;
       }
+    } else {
+      cssPathToUse = constants.paths.DEFAULT_CSS_FILE_PATH;
     }
 
     if (options.hasOwnProperty("templatePath")) {
@@ -49,7 +51,7 @@ export async function generate(...args) {
     } else {
       outputFileNameToUse = constants.names.DEFAULT_OUTPUT_FILE_NAME;
     }
-    
+
     generateEmailHTML(
       cssPathToUse,
       templatePathToUse,
@@ -70,8 +72,12 @@ async function generateEmailHTML(
   outputDirectory = constants.paths.DEFAULT_OUTPUT_DIRECTORY,
   outputFileName = constants.names.DEFAULT_OUTPUT_FILE_NAME
 ) {
-  console.log("outputDirectory:", outputDirectory);
-  console.log("outputFileName:", outputFileName);
+  // console.log("css path:", cssPath);
+  // console.log("html path:", htmlPath);
+  // console.log("markdown path:", markdownPath);
+  // console.log("outputDirectory:", outputDirectory);
+  // console.log("outputFileName:", outputFileName);
+
   let canUseCSSFile = cssPath != "";
   let html = await fileIO.readFile(htmlPath);
   let css = "";
