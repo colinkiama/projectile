@@ -127,6 +127,6 @@ async function createOutputFile(
     await fileIO.makeOutputDirectory(outputDirectory);
   }
   let outputPath = `${outputDirectory}/${outputFileName}`;
-  console.log(outputPath);
   await fileIO.writeFile(outputPath, outputHtml);
+  console.log("Output file is located in:", outputPath);
 }
