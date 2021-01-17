@@ -1,4 +1,4 @@
-# Projectile
+# Projectile [(Available as an npm package)](https://www.npmjs.com/package/slinger-projectile)
 Generate HTML email content for Slinger. 
 
 ## How it works
@@ -12,6 +12,12 @@ Generate HTML email content for Slinger.
 
 ## How to use
 You can just call `generate` and it will automatically get files from `index.css`, `index.html` and `index.md` the `/src` directory within your current one, then generate the final html file called `index.html` in the `/output` directory within your current one.
+
+Example:
+```javascript
+import { generate } from "slinger-projectile";
+generate();
+```
 
 If you would like to modify this behaviour call `generate(options)`.
 
