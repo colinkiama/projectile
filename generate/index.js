@@ -7,7 +7,11 @@ import * as fileIO from "../fileIO/index.js";
 let md;
 
 export async function generate(...args) {
-  let cssPathToUse, htmlPathToUse, markdownPathToUse, outputDirectoryToUse;
+  let cssPathToUse,
+    templatePathToUse,
+    markdownPathToUse,
+    outputDirectoryToUse,
+    outputFileNameToUse;
   if (Array.isArray(args) && args.length > 0) {
     let options = args[0];
 
@@ -22,22 +26,36 @@ export async function generate(...args) {
     }
 
     if (options.hasOwnProperty("templatePath")) {
-      htmlPathToUse = options.templatePath;
+      templatePathToUse = options.templatePath;
+    } else {
+      templatePathToUse = constants.paths.DEFAULT_TEMPLATE_FILE_PATH;
     }
 
     // handle markdown options
     if (options.hasOwnProperty("markdownPath")) {
       markdownPathToUse = options.markdownPath;
+    } else {
+      markdownPathToUse = constants.paths.DEFAULT_MARKDOWN_FILE_PATH;
     }
 
     if (options.hasOwnProperty("outputDirectory")) {
       outputDirectoryToUse = options.outputDirectory;
+    } else {
+      outputDirectoryToUse = constants.paths.DEFAULT_OUTPUT_DIRECTORY;
     }
+
+    if (options.hasOwnProperty("outputFileName")) {
+      outputFileNameToUse = options.outputFileName;
+    } else {
+      outputFileNameToUse = constants.names.DEFAULT_OUTPUT_FILE_NAME;
+    }
+    
     generateEmailHTML(
       cssPathToUse,
-      htmlPathToUse,
+      templatePathToUse,
       markdownPathToUse,
-      outputDirectoryToUse
+      outputDirectoryToUse,
+      outputFileNameToUse
     );
   } else {
     cssPathToUse = constants.paths.DEFAULT_CSS_FILE_PATH;
@@ -52,7 +70,6 @@ async function generateEmailHTML(
   outputDirectory = constants.paths.DEFAULT_OUTPUT_DIRECTORY,
   outputFileName = constants.names.DEFAULT_OUTPUT_FILE_NAME
 ) {
-
   console.log("outputDirectory:", outputDirectory);
   console.log("outputFileName:", outputFileName);
   let canUseCSSFile = cssPath != "";
@@ -106,5 +123,4 @@ async function createOutputFile(
   let outputPath = `${outputDirectory}/${outputFileName}`;
   console.log(outputPath);
   await fileIO.writeFile(outputPath, outputHtml);
-  
 }

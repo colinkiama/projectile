@@ -24,7 +24,8 @@ Full options object possible values
     useCssFile: bool,
     cssPath: string,
     markdownPath: string,
-    outputDirectory: string
+    outputDirectory: string,
+    outputFileName: string
 }
 ```
 
